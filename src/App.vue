@@ -2,7 +2,7 @@
   <div id="app">
     <Header v-on:addTodo="addTodo"></Header>
     <Todo v-bind:propsdata="todoItems" v-on:addDone="addDone" v-on:removeTodo="removeTodo"></Todo>
-    <Done v-bind:propsdata="doneItems" v-on:remmoveDone="removeDone" v-on:cancelDone="cancelDone"></Done>
+    <Done v-bind:propsdata="doneItems" v-on:removeDone="removeDone" v-on:cancelDone="cancelDone"></Done>
   </div>
 </template>
 
@@ -21,52 +21,48 @@ export default {
   },
   methods: {
     addTodo(item) {
-      localStorage.todoItems.setItem(item);
+      // localStorage.todoItems.setItem(item, item);
       this.todoItems.push(item);
     },
-    addDone(item) {
+    addDone(item, idx) {
       // remove
-      localStorage.todoItems.removeItem(item);
-      const idx = this.todoItems.findIndex(o => item);
+      // localStorage.todoItems.removeItem(item);
       this.todoItems.splice(idx, 1);
 
       // add
-      localStorage.setItem(done, item);
+      // localStorage.doneItems.setItem(item, item);
       this.doneItems.push(item);
     },
-    removeTodo(item) {
-      localStorage.todoItems.removeItem(item);
-      const idx = this.todoItems.findIndex(o => item);
+    removeTodo(item, idx) {
+      // localStorage.todoItems.removeItem(item);
       this.todoItems.splice(idx, 1);
     },
-    removeDone(item) {
-      localStorage.done.removeItem(item);
-      const idx = this.doneItems.findeIndex(o => item);
+    removeDone(item, idx) {
+      // localStorage.done.removeItem(item);
       this.doneItems.splice(idx, 1);
     },
-    cancelDone(item) {
+    cancelDone(item, idx) {
       // remove
-      localStorage.doneItems.removeItem(item);
-      const idx = this.doneItems.findIndex(o => item);
+      // localStorage.doneItems.removeItem(item);
       this.doneItems.splice(idx, 1);
 
       //add
-      localStorage.todoItems.addItem(item);
+      // localStorage.todoItems.addItem(item, item);
       this.todoItems.push(item);
     }
   },
-  created() {
-    if (localStorage.todoItems.length > 0) {
-      for (let el of localStorage.todoItems) {
-        this.todoItems.push(el);
-      }
-    }
-    if (localStorage.doneItems.length > 0) {
-      for (let el of localStorage.doneItems) {
-        this.doneItems.push(el);
-      }
-    }
-  },
+  // created() {
+  //   if (localStorage.todoItems.length > 0) {
+  //     for (let el of localStorage.todoItems) {
+  //       this.todoItems.push(el);
+  //     }
+  //   }
+  //   if (localStorage.doneItems.length > 0) {
+  //     for (let el of localStorage.doneItems) {
+  //       this.doneItems.push(el);
+  //     }
+  //   }
+  // },
   components: {
     Header,
     Todo,

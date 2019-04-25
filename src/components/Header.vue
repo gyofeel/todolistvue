@@ -1,12 +1,36 @@
 <template>
   <section class="header">
     <h1 class="title">To Do List</h1>
-    <input class="input" type="text" placeholder="할 일 입력 ...">
+    <input
+      v-model="newTodoItem"
+      v-on:keypress.enter="addTodo"
+      class="input"
+      type="text"
+      placeholder="할 일 입력 ..."
+    >
   </section>
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      newTodoItem: ""
+    };
+  },
+  methods: {
+    addTodo() {
+      if (this.newTodoItem !== "") {
+        let value = this.newTodoItem && this.newTodoItem.trim();
+        this.$emit("addTodo", value);
+        this.clearInput();
+      }
+    },
+    clearInput() {
+      this.newTodoItem = "";
+    }
+  }
+};
 </script>
 
 <style>

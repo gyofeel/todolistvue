@@ -1,21 +1,30 @@
 <template>
   <section class="done">
     <h3>Done</h3>
-    <div class="doneitems">
-      <!-- 컴포넌트로! -->
-      <div class="doneitem">
-        <span>test</span>
+    <transition-group class="doneitems" name="list" tag="div">
+      <div v-for="(doneItem, index) in propsdata" v-bind:key="doneItem" class="doneitem">
+        <span>{{doneItem}}</span>
         <div class="buttons">
-          <button>다시 할일로</button>
-          <button>삭제</button>
+          <span class="backtotodo" @click="cancelDone(doneItem, index)">다시 할일로</span>
+          <span class="removebutton" @click="removeDone(doneItem, index)">삭제</span>
         </div>
       </div>
-    </div>
+    </transition-group>
   </section>
 </template>
 
 <script>
-export default {};
+export default {
+  props: ["propsdata"],
+  methods: {
+    cancelDone(doneItem, idx) {
+      this.$emit("cancelDone", doneItem, idx);
+    },
+    removeDone(doneItem, idx) {
+      this.$emit("removeDone", doneItem, idx);
+    }
+  }
+};
 </script>
 
 <style>
@@ -40,11 +49,19 @@ export default {};
 }
 .done .doneitem {
   padding: 5px 10px;
+  margin: 2px 0;
   background-color: #badc58;
   border-radius: 4px;
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
   align-items: center;
+}
+
+.done .backtotodo {
+  font-size: 0.5rem;
+  cursor: pointer;
+  color: #130f40;
+  padding: 4px;
 }
 </style>
