@@ -39,10 +39,20 @@ export default {
       const idx = this.todoItems.findIndex(o => item);
       this.todoItems.splice(idx, 1);
     },
+    removeDone(item) {
+      localStorage.done.removeItem(item);
+      const idx = this.doneItems.findeIndex(o => item);
+      this.doneItems.splice(idx, 1);
+    },
     cancelDone(item) {
+      //remove
       localStorage.doneItems.removeItem(item);
       const idx = this.doneItems.findIndex(o => item);
       this.doneItems.splice(idx, 1);
+
+      //add
+      localStorage.todoItems.addItem(item);
+      this.todoItems.push(item);
     },
     created() {
       if (localStorage.todoItems.length > 0) {
@@ -71,6 +81,7 @@ body {
   margin: 0;
   border: 0;
   box-sizing: border-box;
+  color: #130f40;
 }
 #app {
   font-family: Helvetica, "Avenir", Arial, sans-serif;
