@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <Header></Header>
-    <Todo></Todo>
-    <Done></Done>
+    <Header v-on:addTodo="addTodo"></Header>
+    <Todo v-bind:propsdata="todoItems" v-on:addDone="addDone" v-on:removeTodo="removeTodo"></Todo>
+    <Done v-bind:propsdata="doneItems" v-on:remmoveDone="removeDone" v-on:cancelDone="cancelDone"></Done>
   </div>
 </template>
 
@@ -45,7 +45,7 @@ export default {
       this.doneItems.splice(idx, 1);
     },
     cancelDone(item) {
-      //remove
+      // remove
       localStorage.doneItems.removeItem(item);
       const idx = this.doneItems.findIndex(o => item);
       this.doneItems.splice(idx, 1);
@@ -53,17 +53,17 @@ export default {
       //add
       localStorage.todoItems.addItem(item);
       this.todoItems.push(item);
-    },
-    created() {
-      if (localStorage.todoItems.length > 0) {
-        for (let el of localStorage.todoItems) {
-          this.todoItems.push(el);
-        }
+    }
+  },
+  created() {
+    if (localStorage.todoItems.length > 0) {
+      for (let el of localStorage.todoItems) {
+        this.todoItems.push(el);
       }
-      if (localStorage.doneItems.length > 0) {
-        for (let el of localStorage.doneItems) {
-          this.doneItems.push(el);
-        }
+    }
+    if (localStorage.doneItems.length > 0) {
+      for (let el of localStorage.doneItems) {
+        this.doneItems.push(el);
       }
     }
   },
