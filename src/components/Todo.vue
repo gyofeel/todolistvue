@@ -55,6 +55,7 @@ export default {
   flex-flow: row wrap;
   justify-content: space-between;
   align-items: center;
+  transition: 0.5s;
 }
 
 .todo .check {
