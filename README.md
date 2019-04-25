@@ -1,7 +1,6 @@
 # todolistvue
 
 
-[Demo](https://gyofeel.github.io/todolistvue/)
 
 
 ## Project setup
