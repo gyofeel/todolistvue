@@ -42,6 +42,10 @@ export default {
   margin-top: 15px;
   padding: 10px 0;
 }
+
+.done::-webkit-scrollbar {
+  display: none;
+}
 .done .doneitems {
   display: flex;
   flex-flow: column nowrap;
