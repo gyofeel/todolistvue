@@ -39,6 +39,11 @@ export default {
   align-items: center;
   border-radius: 10px;
 }
+
+.todo::-webkit-scrollbar{
+  display:none;
+}
+
 .todo .items {
   width: 70%;
   height: 100%;
